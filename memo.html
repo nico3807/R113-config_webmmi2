@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mémo - R1.13 Déploiement web</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect x=%2720%27 y=%2710%27 width=%2760%27 height=%2780%27 rx=%278%27 fill=%27%232f5fd9%27/%3E%3Crect x=%2730%27 y=%2722%27 width=%2740%27 height=%278%27 rx=%272%27 fill=%27%23fff%27/%3E%3Crect x=%2730%27 y=%2738%27 width=%2740%27 height=%278%27 rx=%272%27 fill=%27%23fff%27/%3E%3Cpath d=%27M50 82 V58 M38 68 L50 56 L62 68%27 stroke=%27%23f2a05a%27 stroke-width=%278%27 fill=%27none%27 stroke-linecap=%27round%27/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-page="memo">
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    <header class="site-header">
+      <nav class="nav-wrap">
+        <a class="brand" href="index.html"
+          ><img src="img/logo_iut.jpg" alt="" />
+          <span
+            >R1.13 - Hébergement
+            <small>Déployer ses pages HTML sur web-mmi2</small></span
+          >
+        </a>
+        <div class="site-nav">
+          <a href="index.html" data-nav="index">Accueil</a>
+          <a href="concepts.html" data-nav="concepts">Concepts</a>
+          <a href="tp.html" data-nav="tp">TP</a>
+          <a href="validation.html" data-nav="validation">Validation</a>
+          <a href="memo.html" data-nav="memo">Mémo</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="contenu">
+      <p class="eyebrow">Aide-mémoire</p>
+      <h1>Mémo : déployer sur web-mmi2</h1>
+      <p class="lede">
+        Tout ce qu'il faut garder sous la main pour mettre à jour son site.
+      </p>
+
+      <form class="login-bar" onsubmit="return false">
+        <label for="login-memo">Mon login IUT :</label>
+        <input
+          id="login-memo"
+          type="text"
+          autocomplete="username"
+          spellcheck="false"
+          placeholder="prenom.nom"
+        />
+      </form>
+
+      <h2>Mes informations</h2>
+      <table>
+        <tbody>
+          <tr><th>Adresse de mon site</th><td><span class="perso" data-perso="url"></span></td></tr>
+          <tr><th>Nom d'hôte</th><td><code>web-mmi2.iutbeziers.fr</code></td></tr>
+          <tr><th>Protocole / port</th><td>FTP, port <code>21</code> (ou SFTP, port <code>22</code>)</td></tr>
+          <tr><th>Utilisateur</th><td><span class="perso" data-perso="login"></span> + mot de passe IUT</td></tr>
+          <tr><th>Espace personnel</th><td><span class="perso" data-perso="home"></span></td></tr>
+          <tr><th>Dossier publié</th><td><span class="perso" data-perso="public"></span></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Vocabulaire</h2>
+      <table>
+        <thead><tr><th>Terme</th><th>Définition</th></tr></thead>
+        <tbody>
+          <tr><td>Serveur web (HTTP)</td><td>Logiciel (Apache) qui envoie les pages aux navigateurs. Port 80.</td></tr>
+          <tr><td>Serveur FTP</td><td>Logiciel qui reçoit et envoie des fichiers. Port 21.</td></tr>
+          <tr><td>Client</td><td>Logiciel qui sollicite un serveur : navigateur (HTTP), FileZilla (FTP).</td></tr>
+          <tr><td>Nom d'hôte</td><td>Nom de la machine : l'URL sans le protocole ni le chemin.</td></tr>
+          <tr><td><code>public_html</code></td><td>Seul dossier de l'espace personnel publié sur le Web.</td></tr>
+          <tr><td><code>~login</code></td><td>Dans l'URL, désigne le dossier <code>public_html</code> de l'utilisateur.</td></tr>
+          <tr><td><code>index.html</code></td><td>Page renvoyée quand l'URL désigne un dossier.</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="depannage">Dépannage : que vois-tu ?</h2>
+      <details class="callout">
+        <summary><strong>Not Found (404)</strong></summary>
+        <ul>
+          <li><code>public_html</code> n'existe pas, est mal nommé ou n'est pas directement dans ton espace personnel.</li>
+          <li>Le login dans l'URL est faux, ou il manque le <code>~</code>.</li>
+          <li>Pour une page précise : le nom du fichier ne correspond pas exactement (majuscules, extension).</li>
+        </ul>
+      </details>
+      <details class="callout">
+        <summary><strong>Index of /~login</strong></summary>
+        <p>
+          <code>public_html</code> est bien en place mais il n'y a pas de
+          fichier <code>index.html</code> à sa racine. Renomme ta page
+          d'accueil ou vérifie qu'elle n'est pas restée dans un sous-dossier.
+        </p>
+      </details>
+      <details class="callout">
+        <summary><strong>Forbidden (403)</strong></summary>
+        <p>
+          Les droits sont trop restrictifs. Dans le client FTP : clic droit
+          &gt; <em>Droits d'accès au fichier</em>. <code>755</code> pour les
+          dossiers, <code>644</code> pour les fichiers.
+        </p>
+      </details>
+      <details class="callout">
+        <summary><strong>La page s'affiche sans style ni images</strong></summary>
+        <ul>
+          <li>Les dossiers <code>css/</code> ou <code>img/</code> n'ont pas été envoyés.</li>
+          <li>Chemins absolus vers ton disque (<code>C:\...</code>, <code>file://</code>) : utilise des chemins relatifs.</li>
+          <li>Différence de majuscules entre le nom du fichier et le lien.</li>
+          <li>Ancienne version en cache : recharge avec <kbd>Ctrl</kbd> + <kbd>F5</kbd>.</li>
+        </ul>
+      </details>
+      <details class="callout">
+        <summary><strong>Le client FTP ne se connecte pas</strong></summary>
+        <ul>
+          <li>Vérifie l'hôte : <code>web-mmi2.iutbeziers.fr</code>, sans <code>http://</code> ni chemin.</li>
+          <li>Vérifie le couple protocole / port : FTP + 21, ou SFTP + 22.</li>
+          <li>Login IUT, pas l'adresse mail ; attention au verrouillage majuscules pour le mot de passe.</li>
+        </ul>
+      </details>
+
+      <h2>Mettre à jour son site</h2>
+      <ol>
+        <li>Modifier les fichiers sur son poste et les tester localement.</li>
+        <li>Se connecter avec le client FTP, ouvrir <code>public_html</code> côté distant.</li>
+        <li>Envoyer les fichiers modifiés et accepter d'écraser les anciens.</li>
+        <li>Recharger la page dans le navigateur (<kbd>Ctrl</kbd> + <kbd>F5</kbd>).</li>
+      </ol>
+    </main>
+
+    <footer class="site-footer">
+      R1.13 Hébergement - BUT MMI 1 · IUT de Béziers · Espace web
+      <code>web-mmi2.iutbeziers.fr</code>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

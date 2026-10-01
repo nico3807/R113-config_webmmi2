@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Validation - R1.13 Déploiement web</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect x=%2720%27 y=%2710%27 width=%2760%27 height=%2780%27 rx=%278%27 fill=%27%232f5fd9%27/%3E%3Crect x=%2730%27 y=%2722%27 width=%2740%27 height=%278%27 rx=%272%27 fill=%27%23fff%27/%3E%3Crect x=%2730%27 y=%2738%27 width=%2740%27 height=%278%27 rx=%272%27 fill=%27%23fff%27/%3E%3Cpath d=%27M50 82 V58 M38 68 L50 56 L62 68%27 stroke=%27%23f2a05a%27 stroke-width=%278%27 fill=%27none%27 stroke-linecap=%27round%27/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-page="validation">
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    <header class="site-header">
+      <nav class="nav-wrap">
+        <a class="brand" href="index.html"
+          ><img src="img/logo_iut.jpg" alt="" />
+          <span
+            >R1.13 - Hébergement
+            <small>Déployer ses pages HTML sur web-mmi2</small></span
+          >
+        </a>
+        <div class="site-nav">
+          <a href="index.html" data-nav="index">Accueil</a>
+          <a href="concepts.html" data-nav="concepts">Concepts</a>
+          <a href="tp.html" data-nav="tp">TP</a>
+          <a href="validation.html" data-nav="validation">Validation</a>
+          <a href="memo.html" data-nav="memo">Mémo</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="contenu">
+      <p class="eyebrow">Fin du TP</p>
+      <h1>Validation des objectifs</h1>
+      <p class="lede">
+        Vérifie tes connaissances avec le QCM, puis coche les objectifs que tu
+        as atteints.
+      </p>
+
+      <h2>QCM</h2>
+      <form class="qcm" id="qcm">
+        <fieldset>
+          <legend>1. Quel est le rôle d'un serveur web ?</legend>
+          <label><input type="radio" name="q1" /> Stocker les mots de passe des étudiants</label>
+          <label><input type="radio" name="q1" data-bonne /> Répondre aux requêtes HTTP des navigateurs en envoyant les pages demandées</label>
+          <label><input type="radio" name="q1" /> Recevoir les fichiers envoyés avec FileZilla</label>
+          <p class="explication">Le serveur web (Apache ici) parle HTTP avec les navigateurs. La réception des fichiers, c'est le travail du serveur FTP.</p>
+        </fieldset>
+        <fieldset>
+          <legend>2. Quel est le rôle d'un serveur FTP ?</legend>
+          <label><input type="radio" name="q2" /> Afficher les pages HTML dans le navigateur</label>
+          <label><input type="radio" name="q2" /> Traduire un nom d'hôte en adresse IP</label>
+          <label><input type="radio" name="q2" data-bonne /> Permettre d'envoyer et de récupérer des fichiers sur la machine où il tourne</label>
+          <p class="explication">FTP = File Transfer Protocol : un protocole de transfert de fichiers, indépendant du Web.</p>
+        </fieldset>
+        <fieldset>
+          <legend>3. Dans <code>http://web-mmi2.iutbeziers.fr/~jean.dupont/</code>, quel est le nom d'hôte ?</legend>
+          <label><input type="radio" name="q3" /> <code>http://web-mmi2</code></label>
+          <label><input type="radio" name="q3" data-bonne /> <code>web-mmi2.iutbeziers.fr</code></label>
+          <label><input type="radio" name="q3" /> <code>~jean.dupont</code></label>
+          <p class="explication">On enlève le protocole et tout ce qui suit le premier « / ».</p>
+        </fieldset>
+        <fieldset>
+          <legend>4. Pour déposer des fichiers sur web-mmi2 depuis mon poste, il me faut…</legend>
+          <label><input type="radio" name="q4" data-bonne /> un client FTP sur mon poste, et un serveur FTP sur web-mmi2</label>
+          <label><input type="radio" name="q4" /> un serveur FTP sur mon poste</label>
+          <label><input type="radio" name="q4" /> seulement un navigateur</label>
+          <p class="explication">Schéma client-serveur : c'est le client qui sollicite le serveur.</p>
+        </fieldset>
+        <fieldset>
+          <legend>5. Où l'utilisateur <code>jean.dupont</code> doit-il placer ses pages HTML ?</legend>
+          <label><input type="radio" name="q5" /> <code>/home/j/jean.dupont</code></label>
+          <label><input type="radio" name="q5" data-bonne /> <code>/home/j/jean.dupont/public_html</code></label>
+          <label><input type="radio" name="q5" /> <code>/var/www/html</code></label>
+          <p class="explication">Seul le contenu de public_html est publié par le serveur web, à l'adresse /~jean.dupont/.</p>
+        </fieldset>
+        <fieldset>
+          <legend>6. Quel est le port par défaut du protocole FTP ?</legend>
+          <label><input type="radio" name="q6" /> 80</label>
+          <label><input type="radio" name="q6" data-bonne /> 21</label>
+          <label><input type="radio" name="q6" /> 443</label>
+          <p class="explication">21 pour FTP, 22 pour SFTP, 80 pour HTTP, 443 pour HTTPS.</p>
+        </fieldset>
+        <fieldset>
+          <legend>7. Je visite mon URL et j'obtiens « Index of /~login » avec seulement « Parent Directory ». Cela signifie…</legend>
+          <label><input type="radio" name="q7" /> que le serveur est en panne</label>
+          <label><input type="radio" name="q7" data-bonne /> que public_html existe mais ne contient pas encore de fichier index.html</label>
+          <label><input type="radio" name="q7" /> que mon mot de passe est incorrect</label>
+          <p class="explication">Sans index.html, Apache affiche la liste du contenu du dossier, ici vide.</p>
+        </fieldset>
+        <fieldset>
+          <legend>8. J'ai déposé <code>Accueil.HTML</code> dans public_html, mais mon URL affiche toujours « Index of ». Pourquoi ?</legend>
+          <label><input type="radio" name="q8" data-bonne /> Le serveur cherche un fichier nommé exactement <code>index.html</code></label>
+          <label><input type="radio" name="q8" /> Il faut attendre 24 heures</label>
+          <label><input type="radio" name="q8" /> Il faut l'envoyer en HTTP plutôt qu'en FTP</label>
+          <p class="explication">La page d'accueil doit s'appeler index.html, en minuscules.</p>
+        </fieldset>
+        <p>
+          <button class="btn" type="submit">Corriger</button>
+          <button class="btn secondary" type="reset">Effacer</button>
+        </p>
+        <p class="score" id="qcm-score" aria-live="polite"></p>
+      </form>
+
+      <h2>Mes objectifs</h2>
+      <ul class="objectifs-check">
+        <li><label><input type="checkbox" value="http" /><span>Je sais expliquer le rôle d'un serveur web (serveur HTTP).</span></label></li>
+        <li><label><input type="checkbox" value="ftp" /><span>Je sais expliquer le rôle d'un serveur FTP, et la différence entre client et serveur.</span></label></li>
+        <li><label><input type="checkbox" value="hote" /><span>Je sais retrouver un nom d'hôte à partir d'une URL.</span></label></li>
+        <li><label><input type="checkbox" value="deploy" /><span>J'ai déployé mes pages HTML sur mon espace web : <a data-lien-perso target="_blank" rel="noopener" href="#"><span data-perso="url"></span></a></span></label></li>
+      </ul>
+
+      <div class="callout ok bravo" id="bravo" hidden>
+        <h3>🏆 Objectifs atteints</h3>
+        <p>QCM sans faute et tous les objectifs cochés : bravo, ton site est en ligne !</p>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      R1.13 Hébergement - BUT MMI 1 · IUT de Béziers · Espace web
+      <code>web-mmi2.iutbeziers.fr</code>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/validation.js"></script>
+  </body>
+</html>

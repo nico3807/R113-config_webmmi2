@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>R1.13 - Déploiement de pages HTML sur web-mmi2</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect x=%2720%27 y=%2710%27 width=%2760%27 height=%2780%27 rx=%278%27 fill=%27%232f5fd9%27/%3E%3Crect x=%2730%27 y=%2722%27 width=%2740%27 height=%278%27 rx=%272%27 fill=%27%23fff%27/%3E%3Crect x=%2730%27 y=%2738%27 width=%2740%27 height=%278%27 rx=%272%27 fill=%27%23fff%27/%3E%3Cpath d=%27M50 82 V58 M38 68 L50 56 L62 68%27 stroke=%27%23f2a05a%27 stroke-width=%278%27 fill=%27none%27 stroke-linecap=%27round%27/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-page="index">
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    <header class="site-header">
+      <nav class="nav-wrap">
+        <a class="brand" href="index.html"
+          ><img src="img/logo_iut.jpg" alt="" />
+          <span
+            >R1.13 - Hébergement
+            <small>Déployer ses pages HTML sur web-mmi2</small></span
+          >
+        </a>
+        <div class="site-nav">
+          <a href="index.html" data-nav="index">Accueil</a>
+          <a href="concepts.html" data-nav="concepts">Concepts</a>
+          <a href="tp.html" data-nav="tp">TP</a>
+          <a href="validation.html" data-nav="validation">Validation</a>
+          <a href="memo.html" data-nav="memo">Mémo</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="contenu">
+      <p class="eyebrow">TP - BUT MMI 1 · R1.13 Hébergement</p>
+      <h1>Déploiement de pages HTML sur un serveur web</h1>
+      <p class="lede">
+        Mettre ses premières pages HTML en ligne, sur l'espace web que l'IUT de
+        Béziers met à disposition de chaque étudiant·e, en comprenant qui fait
+        quoi entre le serveur web (HTTP) et le serveur de fichiers (FTP).
+      </p>
+
+      <form class="login-bar" onsubmit="return false">
+        <label for="login-accueil">Mon login IUT :</label>
+        <input
+          id="login-accueil"
+          type="text"
+          autocomplete="username"
+          spellcheck="false"
+          placeholder="prenom.nom"
+        />
+        <span class="hint"
+          >Toutes les adresses et chemins du TP s'adaptent à ton login. Il
+          reste dans ton navigateur, rien n'est envoyé.</span
+        >
+      </form>
+
+      <div class="grid cols-3">
+        <div class="card">
+          <p class="eyebrow">Ton espace web</p>
+          <p>L'adresse de ton site, une fois déployé :</p>
+          <p><span class="perso" data-perso="url"></span></p>
+        </div>
+        <div class="card">
+          <p class="eyebrow">La machine</p>
+          <p>
+            Un seul serveur, deux services : un serveur web (HTTP, port 80) et
+            un serveur FTP (port 21), tous deux sur
+            <code>web-mmi2.iutbeziers.fr</code>.
+          </p>
+        </div>
+        <div class="card">
+          <p class="eyebrow">Outils</p>
+          <p>
+            Un navigateur web, un client FTP (FileZilla sur les postes de
+            l'IUT) et les pages HTML réalisées dans les autres ressources.
+          </p>
+        </div>
+      </div>
+
+      <h2>Objectifs à atteindre</h2>
+      <p>Sur ce TP, vous devez arriver aux objectifs suivants :</p>
+      <div class="grid cols-3">
+        <div class="card">
+          <h3>&rarr; Serveur web</h3>
+          <p>Comprendre le rôle d'un serveur web (serveur HTTP).</p>
+        </div>
+        <div class="card">
+          <h3>&rarr; Serveur FTP</h3>
+          <p>Comprendre le rôle d'un serveur FTP.</p>
+        </div>
+        <div class="card">
+          <h3>&rarr; Déploiement</h3>
+          <p>
+            Arriver à déployer vos pages HTML sur l'espace Web qui vous est mis
+            à disposition à l'IUT.
+          </p>
+        </div>
+      </div>
+
+      <h2>Déroulé</h2>
+      <ul class="timeline">
+        <li>
+          <span
+            ><strong>Concepts</strong> - Client, serveur, HTTP, FTP : un
+            schéma animé et le découpage de ton URL pour poser le
+            vocabulaire.</span
+          >
+        </li>
+        <li>
+          <span
+            ><strong>TP · Exercice 1</strong> - Découverte de l'environnement
+            et des outils : ton URL, le nom d'hôte, le client FTP, le dossier
+            <code>public_html</code>, avec un simulateur pour s'entraîner sans
+            risque.</span
+          >
+        </li>
+        <li>
+          <span
+            ><strong>TP · 1.2</strong> - Dépôt et consultation de pages HTML :
+            déployer un petit site réalisé dans un autre module.</span
+          >
+        </li>
+        <li>
+          <span
+            ><strong>Validation des objectifs</strong> - QCM corrigé et
+            auto-évaluation.</span
+          >
+        </li>
+      </ul>
+
+      <div class="grid cols-2" style="margin-top: 2rem; align-items: center">
+        <figure class="etape-figure">
+          <img
+            src="img/img1.jpg"
+            alt="Fenêtre d'un client FTP : à gauche les dossiers du disque local, à droite le dossier personnel /home/n/nicolas.maurin1 du serveur."
+          />
+        </figure>
+        <div class="callout">
+          <h4>À quoi ressemble un client FTP ?</h4>
+          <p>
+            Deux panneaux côte à côte : <strong>à gauche</strong> ton
+            ordinateur, <strong>à droite</strong> le serveur. Déployer un site,
+            c'est faire passer des fichiers de gauche à droite, dans le bon
+            dossier.
+          </p>
+          <p><a class="btn" href="concepts.html">Commencer par les concepts</a></p>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      R1.13 Hébergement - BUT MMI 1 · IUT de Béziers · Espace web
+      <code>web-mmi2.iutbeziers.fr</code>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

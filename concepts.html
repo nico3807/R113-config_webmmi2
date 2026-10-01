@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Concepts - R1.13 Déploiement web</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect x=%2720%27 y=%2710%27 width=%2760%27 height=%2780%27 rx=%278%27 fill=%27%232f5fd9%27/%3E%3Crect x=%2730%27 y=%2722%27 width=%2740%27 height=%278%27 rx=%272%27 fill=%27%23fff%27/%3E%3Crect x=%2730%27 y=%2738%27 width=%2740%27 height=%278%27 rx=%272%27 fill=%27%23fff%27/%3E%3Cpath d=%27M50 82 V58 M38 68 L50 56 L62 68%27 stroke=%27%23f2a05a%27 stroke-width=%278%27 fill=%27none%27 stroke-linecap=%27round%27/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-page="concepts">
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    <header class="site-header">
+      <nav class="nav-wrap">
+        <a class="brand" href="index.html"
+          ><img src="img/logo_iut.jpg" alt="" />
+          <span
+            >R1.13 - Hébergement
+            <small>Déployer ses pages HTML sur web-mmi2</small></span
+          >
+        </a>
+        <div class="site-nav">
+          <a href="index.html" data-nav="index">Accueil</a>
+          <a href="concepts.html" data-nav="concepts">Concepts</a>
+          <a href="tp.html" data-nav="tp">TP</a>
+          <a href="validation.html" data-nav="validation">Validation</a>
+          <a href="memo.html" data-nav="memo">Mémo</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="contenu">
+      <p class="eyebrow">Avant de manipuler</p>
+      <h1>Client, serveur, HTTP et FTP</h1>
+      <p class="lede">
+        Mettre un site en ligne fait intervenir deux services indépendants qui
+        tournent sur la même machine : l'un sert à déposer les fichiers,
+        l'autre à les afficher.
+      </p>
+
+      <form class="login-bar" onsubmit="return false">
+        <label for="login-concepts">Mon login IUT :</label>
+        <input
+          id="login-concepts"
+          type="text"
+          autocomplete="username"
+          spellcheck="false"
+          placeholder="prenom.nom"
+        />
+      </form>
+
+      <h2>Le schéma client-serveur, en mouvement</h2>
+      <p>
+        La communication suit un schéma logique <strong>client-serveur</strong> :
+        il faut qu'un client sollicite un serveur pour que ce dernier lui
+        réponde. Lance les deux animations et observe quel client parle à quel
+        serveur.
+      </p>
+
+      <figure class="schema">
+        <svg
+          id="schema-svg"
+          viewBox="0 0 800 330"
+          role="img"
+          aria-labelledby="schema-titre"
+        >
+          <title id="schema-titre">
+            Le poste de l'étudiant contient un client FTP et un navigateur. Le
+            serveur web-mmi2.iutbeziers.fr contient un serveur FTP sur le port
+            21, un serveur web Apache sur le port 80, et le disque où se trouve
+            public_html. Le client FTP dialogue avec le serveur FTP, le
+            navigateur avec Apache.
+          </title>
+          <rect class="boite" x="15" y="15" width="250" height="300" rx="14" />
+          <text x="140" y="42" text-anchor="middle" font-weight="700">
+            Ton poste (client)
+          </text>
+          <rect id="svc-client-ftp" class="service ftp" x="35" y="70" width="210" height="62" rx="10" />
+          <text x="140" y="96" text-anchor="middle" font-weight="700">Client FTP</text>
+          <text x="140" y="117" text-anchor="middle" font-size="13">FileZilla, WinSCP…</text>
+          <rect id="svc-navigateur" class="service http" x="35" y="225" width="210" height="62" rx="10" />
+          <text x="140" y="251" text-anchor="middle" font-weight="700">Navigateur</text>
+          <text x="140" y="272" text-anchor="middle" font-size="13">client HTTP</text>
+
+          <rect class="boite" x="535" y="15" width="250" height="300" rx="14" />
+          <text x="660" y="42" text-anchor="middle" font-weight="700">
+            web-mmi2.iutbeziers.fr
+          </text>
+          <rect id="svc-serveur-ftp" class="service ftp" x="555" y="70" width="200" height="60" rx="10" />
+          <text x="655" y="96" text-anchor="middle" font-weight="700">Serveur FTP</text>
+          <text x="655" y="117" text-anchor="middle" font-size="13">port 21</text>
+          <rect id="svc-disque" class="service boite" x="580" y="160" width="150" height="34" rx="17" />
+          <text x="655" y="182" text-anchor="middle" font-size="13">💾 ~/public_html/</text>
+          <rect id="svc-apache" class="service http" x="555" y="225" width="200" height="60" rx="10" />
+          <text x="655" y="251" text-anchor="middle" font-weight="700">Serveur web Apache</text>
+          <text x="655" y="272" text-anchor="middle" font-size="13">HTTP · port 80</text>
+
+          <line class="lien" x1="255" y1="100" x2="545" y2="100" />
+          <line class="lien" x1="255" y1="260" x2="545" y2="260" />
+          <text x="400" y="88" text-anchor="middle" font-size="13">FTP : déposer des fichiers</text>
+          <text x="400" y="300" text-anchor="middle" font-size="13">HTTP : consulter des pages</text>
+          <text x="400" y="180" text-anchor="middle" font-size="22">☁️</text>
+          <text x="400" y="200" text-anchor="middle" font-size="12">réseau</text>
+
+          <circle id="schema-paquet" class="paquet" cx="255" cy="100" r="9" />
+          <text id="schema-paquet-txt" class="paquet" x="255" y="86" text-anchor="middle" font-size="12" font-weight="700"></text>
+        </svg>
+        <div class="schema-actions">
+          <button type="button" class="btn ftp" data-scenario="ftp">
+            ⬆ Déposer index.html (FTP)
+          </button>
+          <button type="button" class="btn http" data-scenario="http">
+            🌐 Consulter la page (HTTP)
+          </button>
+        </div>
+        <p class="schema-legende" id="schema-legende" aria-live="polite">
+          Clique sur un bouton pour lancer l'animation.
+        </p>
+      </figure>
+
+      <div class="callout">
+        <h4>À retenir</h4>
+        <p>
+          FTP (<em>File Transfer Protocol</em>) est un protocole de transfert de
+          fichiers. C'est un service qui tourne en
+          <strong>totale indépendance du Web</strong> : ils ne sont pas liés.
+          Ils partagent seulement le même disque.
+        </p>
+      </div>
+
+      <h2>Les mots du TP</h2>
+      <p>Retourne chaque carte pour vérifier que tu connais la définition.</p>
+      <div class="flip-grid">
+        <button type="button" class="flip">
+          <span class="flip-inner">
+            <span class="flip-face"><strong>Serveur web</strong><small>aussi appelé serveur HTTP</small></span>
+            <span class="flip-face flip-back">Logiciel (ici Apache) qui répond aux requêtes des navigateurs en leur envoyant les pages demandées.</span>
+          </span>
+        </button>
+        <button type="button" class="flip">
+          <span class="flip-inner">
+            <span class="flip-face"><strong>Serveur FTP</strong><small>File Transfer Protocol</small></span>
+            <span class="flip-face flip-back">Logiciel qui permet de recevoir et d'envoyer des fichiers vers la machine où il tourne, après authentification.</span>
+          </span>
+        </button>
+        <button type="button" class="flip">
+          <span class="flip-inner">
+            <span class="flip-face"><strong>Client FTP</strong><small>FileZilla, WinSCP…</small></span>
+            <span class="flip-face flip-back">Logiciel installé sur ton poste, qui sollicite un serveur FTP pour lui envoyer ou récupérer des fichiers.</span>
+          </span>
+        </button>
+        <button type="button" class="flip">
+          <span class="flip-inner">
+            <span class="flip-face"><strong>Nom d'hôte</strong><small>terminologie à retenir</small></span>
+            <span class="flip-face flip-back">Nom de la machine sur le réseau, ici <code>web-mmi2.iutbeziers.fr</code>. On le trouve dans l'URL entre <code>http://</code> et le premier <code>/</code>.</span>
+          </span>
+        </button>
+        <button type="button" class="flip">
+          <span class="flip-inner">
+            <span class="flip-face"><strong>Port</strong><small>21, 22, 80…</small></span>
+            <span class="flip-face flip-back">Numéro qui désigne le service à joindre sur une machine : 80 pour HTTP, 21 pour FTP, 22 pour SFTP/SSH.</span>
+          </span>
+        </button>
+        <button type="button" class="flip">
+          <span class="flip-inner">
+            <span class="flip-face"><strong>public_html</strong><small>un dossier pas comme les autres</small></span>
+            <span class="flip-face flip-back">Dossier de ton espace personnel dont le contenu est publié par le serveur web. Tout ce qui est ailleurs reste invisible sur le Web.</span>
+          </span>
+        </button>
+      </div>
+
+      <h2>Anatomie de ton URL</h2>
+      <p>
+        Clique sur chaque partie de l'adresse de ton espace web pour comprendre
+        son rôle.
+      </p>
+      <p
+        class="url-dissect"
+        id="url-dissect"
+      ><span class="u-proto" tabindex="0" role="button">http://</span><span class="u-hote" tabindex="0" role="button">web-mmi2.iutbeziers.fr</span><span class="u-chemin" tabindex="0" role="button">/~<span data-perso="login"></span>/</span></p>
+      <div class="callout url-explication" id="url-explication" aria-live="polite">
+        <p>
+          À partir de l'URL, il est facile de trouver le nom de la machine
+          hébergeant le serveur Web : il suffit d'enlever le protocole,
+          <code>http://</code>, et tout ce qui est après le premier
+          <code>/</code> (en incluant le <code>/</code>).
+        </p>
+      </div>
+
+      <p style="text-align: center; margin-top: 2rem">
+        <a class="btn" href="tp.html">Passer au TP &rarr;</a>
+      </p>
+    </main>
+
+    <footer class="site-footer">
+      R1.13 Hébergement - BUT MMI 1 · IUT de Béziers · Espace web
+      <code>web-mmi2.iutbeziers.fr</code>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/concepts.js"></script>
+  </body>
+</html>
