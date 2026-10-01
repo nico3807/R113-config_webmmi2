@@ -821,8 +821,9 @@ details.indice summary {
   margin: 1rem 0;
 }
 .flip {
+  display: block;
+  width: 100%;
   perspective: 900px;
-  min-height: 150px;
   border: 0;
   padding: 0;
   background: none;
@@ -831,8 +832,12 @@ details.indice summary {
   cursor: pointer;
   text-align: left;
 }
+/* Les deux faces sont empilees dans la meme cellule de grille : la carte
+   prend la hauteur de la face la plus longue, sans hauteur fixe qui
+   couperait un texte long. Les <span> (seuls autorises dans un <button>)
+   doivent etre passes en bloc, sinon ils n'ont ni largeur ni hauteur. */
 .flip-inner {
-  position: relative;
+  display: grid;
   height: 100%;
   min-height: 150px;
   transition: transform 0.5s ease;
@@ -842,20 +847,31 @@ details.indice summary {
   transform: rotateY(180deg);
 }
 .flip-face {
-  position: absolute;
-  inset: 0;
+  grid-area: 1 / 1;
   padding: 1rem;
   border-radius: 10px;
   border: 1px solid var(--border);
   background: var(--bg-alt);
   box-shadow: var(--shadow);
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 0.3rem;
+  line-height: 1.45;
 }
-.flip-face strong {
+.flip:hover .flip-face,
+.flip:focus-visible .flip-face {
+  border-color: var(--primary);
+}
+.flip-face:not(.flip-back)::after {
+  content: 'Cliquer pour retourner \21BB';
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--primary);
+}
+.flip-face:not(.flip-back) strong {
   font-size: 1.05rem;
 }
 .flip-face small {
@@ -865,6 +881,10 @@ details.indice summary {
   transform: rotateY(180deg);
   background: var(--primary-bg);
   font-size: 0.9rem;
+  /* Texte courant avec du <code> et du gras : en flex, chaque morceau
+     deviendrait un bloc a part et passerait a la ligne. */
+  display: block;
+  align-content: center;
 }
 
 /* ---------- Schema client / serveur anime ---------- */
