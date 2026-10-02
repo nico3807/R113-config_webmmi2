@@ -47,7 +47,7 @@ R113-config_webmmi2/
 ├── validation.html   Validation des objectifs : QCM et auto-évaluation
 ├── memo.html         Informations de connexion, vocabulaire, dépannage
 ├── css/style.css     Feuille de style partagée (thème clair / sombre)
-├── img/              Images du sujet Word (img1 à img3, logo, icône, connexion)
+├── img/              Images du sujet Word (img1 à img3, logo, icône, connexion), logos IUT et MMI
 └── js/
     ├── main.js        Navigation, login, étapes, progression, questions
     ├── concepts.js    Schéma animé et découpage de l'URL

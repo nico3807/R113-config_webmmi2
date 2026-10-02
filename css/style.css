@@ -694,6 +694,25 @@ footer a {
   background: #fff;
   padding: 2px 4px;
 }
+/* Le logo MMI est carre : a hauteur egale il paraitrait plus petit que
+   celui de l'IUT, tout en largeur. */
+.brand img[src$='logo_mmi.jpg'] {
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+}
+@media (max-width: 480px) {
+  .brand {
+    white-space: normal;
+    gap: 0.45rem;
+  }
+  .brand img {
+    height: 28px;
+  }
+  .brand img[src$='logo_mmi.jpg'] {
+    height: 36px;
+  }
+}
 
 /* ---------- Barre « mon login » ---------- */
 
